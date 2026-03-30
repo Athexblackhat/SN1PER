@@ -23,7 +23,7 @@
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="https://via.placeholder.com/800x400/0a0a0a/00ff00?text=SN1PER+Main+Menu" alt="SN1PER Main Menu" width="80%">
+  <img src="" alt="SN1PER Main Menu" width="80%">
   <br>
   <em>⚡ SN1PER v3.0 - Cyberpunk Interface ⚡</em>
 </div>
@@ -161,5 +161,3 @@ MIT License — Copyright (c) 2024 ATHEX HACKER. See `LICENSE` for details.
 ---
 
 **Remember:** Always obtain written authorization before testing any system. Unauthorized access is a criminal offense in most jurisdictions.
-# Run SN1PER
-./sn1per.sh
