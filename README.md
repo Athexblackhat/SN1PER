@@ -63,25 +63,103 @@
 
 ---
 
-## 📦 Installation
 
-### 🔧 **Requirements**
+## Requirements
+
 - Python 3.8+
 - Git
-- Internet Connection
+- Internet connection
 - Linux / Termux / Kali Linux
 
-### 💻 **Quick Install**
+---
+
+## Installation
+
+### Kali Linux / Ubuntu
 
 ```bash
-# Clone the repository
+sudo apt update && sudo apt upgrade
+sudo apt install git python3 python3-pip figlet lolcat bc
 git clone https://github.com/Athexhacker/SN1PER.git
-
-# Navigate to directory
 cd SN1PER
+sudo bash sn1per.sh
+```
 
-# Make executable
-chmod +x sn1per.sh
+### Termux (Android)
 
+```bash
+pkg update && pkg upgrade
+pkg install git python python-pip figlet lolcat bc
+git clone https://github.com/Athexhacker/SN1PER.git
+cd SN1PER
+bash sn1per.sh
+```
+
+---
+
+## Usage
+
+On launch, you'll see a numbered menu. Type a number to select a tool, `01` to install all tools, or `00` to exit.
+
+### Example: Nmap
+
+```bash
+# Basic port scan
+nmap target.local
+
+# Aggressive scan (use only on authorized targets)
+nmap -A target.local
+```
+
+### Example: SQLMap
+
+```bash
+# Test for SQL injection (authorized targets only)
+sqlmap -u "http://testsite.local/page.php?id=1"
+```
+
+### Example: Metasploit
+
+```bash
+msfconsole
+search <module_name>
+use exploit/...
+```
+
+---
+
+## Keyboard Shortcuts
+
+| Key | Action |
+|---|---|
+| `00` | Exit program |
+| `01` | Install all tools |
+| `Ctrl+C` | Safe exit |
+
+---
+
+## Changelog
+
+**v3.0** — Complete UI overhaul, new animations, 5 new tools added  
+**v2.0** — 15 new tools, improved error handling, better install scripts  
+**v1.0** — Initial release with 20 tools
+
+---
+---
+
+## Contact
+
+- **Email:** athexhacker@protonmail.com
+- **GitHub:** [@Athexhacker](https://github.com/Athexhacker)
+
+---
+
+## License
+
+MIT License — Copyright (c) 2024 ATHEX HACKER. See `LICENSE` for details.
+
+---
+
+**Remember:** Always obtain written authorization before testing any system. Unauthorized access is a criminal offense in most jurisdictions.
 # Run SN1PER
 ./sn1per.sh
