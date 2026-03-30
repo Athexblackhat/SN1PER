@@ -1,49 +1,148 @@
-# SN1PER Hacker Toolkit
-![SN1PERlogo](https://github.com/Athexhacker/SN1PER/assets/153435050/ea41babb-e41b-4dc9-8fdc-3bbf08f11a8f)
-[![release v2.0 ](https://img.shields.io/badge/release-v1.1-green.svg?style=flat-square)](https://github.com/Athexhacker/SN1PER/releases/)
-[![Github Stars](https://img.shields.io/github/stars/Athexhacker/SN1PER.svg?style=social&label=Stars)](https://github.com/Athexhacker/SN1PER/)
-[![Follow on Twitter](https://img.shields.io/twitter/follow/AnonSecIta.svg?style=social&label=AnonSecIta)](https://twitter.com/AnonSecIta/)
+# SN1PER - Penetration Testing Framework
 
+> **⚠️ Legal Notice:** This toolkit is intended strictly for **authorized penetration testing and security research** on systems you own or have explicit written permission to test. Unauthorized use against systems is illegal and unethical. The author bears no responsibility for misuse.
 
- 
-# All tools you need
-- You can install one at time.
-- You can install all tools.
- 
+---
 
-# 🟢 Requirements
-- Bash: An sh-compatible command language.
-- Colorama: A simple cross-platform API to print colored terminal text from Python applications.
-- Lolcat: Display Text in Rainbow Colors
-- Figlet: Creates large characters out of ordinary screen characters.
+## Overview
 
-# 🔧 Install Requirements
+SN1PER is a penetration testing framework providing a centralized menu-driven interface for 35+ security tools. It targets security professionals, ethical hackers, and students learning about cybersecurity in controlled, authorized environments.
 
-   
-    sudo apt-get update
-    sudo apt-get install lolcat
-    sudo apt-get -y install figlet
-    sudo apt-get -y install bash
-    sudo apt-get -y install python3-colorama
- # Install SN1PER
+**Supported Platforms:** Kali Linux · Ubuntu · Termux (Android)  
+**Language:** Python 3.8+ / Bash  
+**License:** MIT
 
-  
-    git clone https://github.com/Athexhacker/SN1PER.git
-   
-# 💻 Usage
-    cd SN1PER
-    sh SN1PER.sh
-    
-# ⌨️ Type a number
-  
-➕ - 24 (Dark-Dump) 
+---
 
-➕ - 19 (WPScan) 
+## Features
 
-➕ - 01 to install 'all'
- 
+- Menu-driven interface for 35+ security tools
+- One-click tool installation
+- Centralized tool storage under `/SN1PER`
+- Animated terminal UI (matrix effect, loading bars)
+- Real-time progress indicators
 
+---
 
-# contact me on whatsapp any kind of issue .
-# +92 3475549695
+## Tool Categories
 
+| Category | Tools |
+|---|---|
+| Network Scanning | Nmap, IP-Tracer |
+| Vulnerability Assessment | SQLMap, WPScan, Joomscan, XSStrike |
+| Information Gathering | RED_HAWK, Sherlock, PhoneInfoga, Geo-Recon |
+| Web Security | XSS-Loader, BlackWidow, Universal-Bypass |
+| Password Auditing | THC-Hydra |
+| Exploitation Frameworks | Metasploit (msfconsole), PHPSploit |
+| OSINT | Dorks Eye, DorkScanner |
+
+> Tools should only be used against systems in authorized test environments (e.g., HackTheBox, TryHackMe, your own lab).
+
+---
+
+## Requirements
+
+- Python 3.8+
+- Git
+- Internet connection
+- Linux / Termux / Kali Linux
+
+---
+
+## Installation
+
+### Kali Linux / Ubuntu
+
+```bash
+sudo apt update && sudo apt upgrade
+sudo apt install git python3 python3-pip figlet lolcat bc
+git clone https://github.com/Athexhacker/SN1PER.git
+cd SN1PER
+sudo bash sn1per.sh
+```
+
+### Termux (Android)
+
+```bash
+pkg update && pkg upgrade
+pkg install git python python-pip figlet lolcat bc
+git clone https://github.com/Athexblackhat/SN1PER.git
+cd SN1PER
+bash sn1per.sh
+```
+
+---
+
+## Usage
+
+On launch, you'll see a numbered menu. Type a number to select a tool, `01` to install all tools, or `00` to exit.
+
+### Example: Nmap
+
+```bash
+# Basic port scan
+nmap target.local
+
+# Aggressive scan (use only on authorized targets)
+nmap -A target.local
+```
+
+### Example: SQLMap
+
+```bash
+# Test for SQL injection (authorized targets only)
+sqlmap -u "http://testsite.local/page.php?id=1"
+```
+
+### Example: Metasploit
+
+```bash
+msfconsole
+search <module_name>
+use exploit/...
+```
+
+---
+
+## Keyboard Shortcuts
+
+| Key | Action |
+|---|---|
+| `00` | Exit program |
+| `01` | Install all tools |
+| `Ctrl+C` | Safe exit |
+
+---
+
+## Changelog
+
+**v3.0** — Complete UI overhaul, new animations, 5 new tools added  
+**v2.0** — 15 new tools, improved error handling, better install scripts  
+**v1.0** — Initial release with 20 tools
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Commit changes: `git commit -m 'Add my feature'`
+4. Push: `git push origin feature/my-feature`
+5. Open a Pull Request
+
+---
+
+## Contact
+
+- **Whatsapp:** +92 3490916663
+- **GitHub:** [@Athexhacker](https://github.com/Athexblackhat)
+
+---
+
+## License
+
+MIT License — Copyright (c) 2025 ATHEX BLACK HAT. See `LICENSE` for details.
+
+---
+
+**Remember:** Always obtain written authorization before testing any system. Unauthorized access is a criminal offense in most jurisdictions.
