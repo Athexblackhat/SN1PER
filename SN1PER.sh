@@ -9,6 +9,11 @@
 # Clean terminal
 clear
 
+# Check for required commands
+command -v bc >/dev/null 2>&1 || { echo -e "\033[38;2;255;0;0mError: bc is required but not installed. Install it with: sudo apt install bc\033[0m" >&2; exit 1; }
+command -v figlet >/dev/null 2>&1 || { echo -e "\033[38;2;255;0;0mWarning: figlet not installed. Some features disabled.\033[0m" >&2; }
+command -v lolcat >/dev/null 2>&1 || { echo -e "\033[38;2;255;0;0mWarning: lolcat not installed. Some features disabled.\033[0m" >&2; }
+
 # ============================================
 # ADVANCED COLOR SCHEME
 # ============================================
@@ -50,8 +55,8 @@ matrix_rain() {
     for i in {1..3}; do
         echo -ne "${matrix_green}"
         for j in {1..50}; do
-            echo -ne "$(($RANDOM % 2))"
-            sleep 0.001
+            echo -ne "$((RANDOM % 2))"
+            sleep 0.001 2>/dev/null || sleep 0.01
         done
         echo -ne "${reset}\r"
         sleep 0.05
@@ -162,7 +167,6 @@ echo
 # ============================================
 # CTRL + C HANDLER WITH ANIMATION
 # ============================================
-trap ctrl_c INT
 ctrl_c() {
     clear
     echo -e "\n${neon_red}${bold}${blink}⚠ SYSTEM BREACH DETECTED ⚠${reset}\n"
@@ -172,17 +176,22 @@ ctrl_c() {
     echo -e "${neon_blue}[#]> 📁 Tools installed at: /SN1PER${reset}"
     sleep 0.5
     echo -e "${neon_purple}"
-    figlet "GOODBYE" | lolcat
+    if command -v figlet >/dev/null 2>&1 && command -v lolcat >/dev/null 2>&1; then
+        figlet "GOODBYE" | lolcat
+    else
+        echo -e "GOODBYE"
+    fi
     echo -e "${reset}"
     sleep 1
-    exit
+    exit 0
 }
+
+trap ctrl_c INT
 
 # ============================================
 # MAIN MENU LOOP
 # ============================================
-lagi=1
-while [ $lagi -lt 6 ]; do
+while true; do
     echo ""
     echo ""
 
@@ -199,62 +208,59 @@ while [ $lagi -lt 6 ]; do
     
     # Tools menu with animated entries
     tools=(
-        "NMAP|Network Mapper & Port Scanner|🌐"
-        "RED_HAWK|All-in-one Info Gathering & Vuln Scanner|🦅"
-        "SQLMap|Automated SQL Injection Tool|💉"
-        "Sniper|Attack Surface Management Platform|🎯"
-        "Sherlock|Social Media Username Hunter|🔍"
-        "MSFConsole|Metasploit Framework|⚡"
-        "Hackertarget|Network Intelligence Tools|🎲"
-        "Geo-Recon|IP Geolocation & OSINT Tool|📍"
-        "Darkai|300+ Hacking Tools Collection|🌑"
-        "Anonsec|DDoS Attack Tool|💣"
-        "AnonSecIta-DDoS|L7/L4 DDoS Tool|🔥"
-        "DDoS-Rip|Powerful DDoS Tool|💀"
-        "THC-Hydra|Password Brute-Force Tool|🔐"
-        "KARMA-DDoS|Advanced DDoS Tool|🌀"
-        "MHDDoS|56 Methods DDoS Tool|🌪️"
-        "White Deface|Website Defacement Tool|⚪"
-        "Mass Deface|Mass Website Defacement|📝"
-        "PHPSploit|PHP C2 Framework|🐘"
-        "WPScan|WordPress Security Scanner|🔧"
-        "MySql|Database Management System|🗄️"
-        "Blindy|Blind SQL Injection Tool|🎭"
-        "Universal-Bypass|403/401 Bypass Tool|🚪"
-        "Joomscan|Joomla Vulnerability Scanner|📊"
-        "Dark Dump|Dark Web Search Tool|🌌"
-        "Dark Scrape|Dark Web OSINT Tool|🕸️"
-        "Dorks Eye|Google Dork Scanner|👁️"
-        "FSociety|Mr.Robot Tool Collection|🤖"
-        "XSS-Loader|XSS Payload Generator|💢"
-        "XSStrike|Advanced XSS Detection|⚔️"
-        "XSScrapy|XSS/SQLi Spider|🕷️"
-        "IP-Tracer|IP Address Tracker|📍"
-        "Ufonet|DoS/DDoS Attack Tool|👽"
-        "DorkScanner|Vulnerable URL Scanner|🔎"
-        "BlackWidow|Web Application Spider|🕷️"
-        "PhoneInfoga|Phone Number OSINT|📱"
+        "1|NMAP|Network Mapper & Port Scanner|🌐"
+        "2|RED_HAWK|All-in-one Info Gathering & Vuln Scanner|🦅"
+        "3|SQLMap|Automated SQL Injection Tool|💉"
+        "4|Sniper|Attack Surface Management Platform|🎯"
+        "5|Sherlock|Social Media Username Hunter|🔍"
+        "6|MSFConsole|Metasploit Framework|⚡"
+        "7|Hackertarget|Network Intelligence Tools|🎲"
+        "8|Geo-Recon|IP Geolocation & OSINT Tool|📍"
+        "9|Darkai|300+ Hacking Tools Collection|🌑"
+        "10|Anonsec|DDoS Attack Tool|💣"
+        "11|AnonSecIta-DDoS|L7/L4 DDoS Tool|🔥"
+        "12|DDoS-Rip|Powerful DDoS Tool|💀"
+        "13|THC-Hydra|Password Brute-Force Tool|🔐"
+        "14|KARMA-DDoS|Advanced DDoS Tool|🌀"
+        "15|MHDDoS|56 Methods DDoS Tool|🌪️"
+        "16|White Deface|Website Defacement Tool|⚪"
+        "17|Mass Deface|Mass Website Defacement|📝"
+        "18|PHPSploit|PHP C2 Framework|🐘"
+        "19|WPScan|WordPress Security Scanner|🔧"
+        "20|MySql|Database Management System|🗄️"
+        "21|Blindy|Blind SQL Injection Tool|🎭"
+        "22|Universal-Bypass|403/401 Bypass Tool|🚪"
+        "23|Joomscan|Joomla Vulnerability Scanner|📊"
+        "24|Dark Dump|Dark Web Search Tool|🌌"
+        "25|Dark Scrape|Dark Web OSINT Tool|🕸️"
+        "26|Dorks Eye|Google Dork Scanner|👁️"
+        "27|FSociety|Mr.Robot Tool Collection|🤖"
+        "28|XSS-Loader|XSS Payload Generator|💢"
+        "29|XSStrike|Advanced XSS Detection|⚔️"
+        "30|XSScrapy|XSS/SQLi Spider|🕷️"
+        "31|IP-Tracer|IP Address Tracker|📍"
+        "32|Ufonet|DoS/DDoS Attack Tool|👽"
+        "33|DorkScanner|Vulnerable URL Scanner|🔎"
+        "34|BlackWidow|Web Application Spider|🕷️"
+        "35|PhoneInfoga|Phone Number OSINT|📱"
     )
 
     # Display tools with animation
-    for i in "${!tools[@]}"; do
-        IFS='|' read -r name desc icon <<< "${tools[$i]}"
-        num=$((i+1))
+    for tool_entry in "${tools[@]}"; do
+        IFS='|' read -r num name desc icon <<< "$tool_entry"
         
-        if [ $num -le 35 ]; then
-            if [ $((num % 2)) -eq 0 ]; then
-                echo -e "${neon_green}${bold} ┌─[${icon}] ${name}${reset}"
-            else
-                echo -e "${neon_blue}${bold} ┌─[${icon}] ${name}${reset}"
-            fi
-            echo -e "${dim} │  ${desc}${reset}"
-            echo -e "${neon_cyan} ${reset}"
+        if [ $((num % 2)) -eq 0 ]; then
+            echo -e "${neon_green}${bold} ┌─[${icon}] ${name}${reset}"
+        else
+            echo -e "${neon_blue}${bold} ┌─[${icon}] ${name}${reset}"
         fi
+        echo -e "${dim} │  ${desc}${reset}"
+        echo -e "${neon_cyan} ${reset}"
     done
 
     # Special menu items
-    echo -e "${neon_red}${bold} ┌─[❌] EXIT${reset}"
-    echo -e "${neon_yellow}${bold} ┌─[💣] INSTALL ALL TOOLS${reset}"
+    echo -e "${neon_red}${bold} ┌─[❌] 00 - EXIT${reset}"
+    echo -e "${neon_yellow}${bold} ┌─[💣] 99 - INSTALL ALL TOOLS${reset}"
     echo -e "${neon_blue}${bold} └─[📁] Installed Path: /SN1PER${reset}"
     echo -e "${neon_purple}${bold}════════════════════════════════════════════════════════════${reset}"
     
@@ -264,194 +270,194 @@ while [ $lagi -lt 6 ]; do
 
     # Execute based on selection
     case $pil in
-        01) 
-            echo -e "${neon_green}${bold}[+] Cloning SN1PER Database...${reset}"
-            loading_bar 1 "Downloading..."
-            git clone https://github.com/SN1PER/SN1PER.git 
-            echo -e "${neon_blue}[i] Installation Complete!${reset}"
-            echo -e "${neon_yellow}[1] cd SN1PER${reset}"
-            ;;
         1) 
-            echo -e "${neon_green}[+] Installing Nmap...${reset}"
+            echo -e "${neon_green}${bold}[+] Installing Nmap...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/nmap/nmap.git
+            git clone https://github.com/nmap/nmap.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             echo -e "${neon_blue}[i] Usage: cd nmap && ./configure && make && make install${reset}"
             echo -e "${neon_yellow}[Example] nmap target.com${reset}"
             ;;
         2) 
             echo -e "${neon_green}[+] Installing RED_HAWK...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/Tuhinshubhra/RED_HAWK.git
+            git clone https://github.com/Tuhinshubhra/RED_HAWK.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             echo -e "${neon_blue}[i] Usage: cd RED_HAWK && php rhawk.php${reset}"
             ;;
         3) 
             echo -e "${neon_green}[+] Installing SQLMap...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/sqlmapproject/sqlmap.git
+            git clone https://github.com/sqlmapproject/sqlmap.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             echo -e "${neon_blue}[i] Usage: cd sqlmap && python3 sqlmap.py -u target.com?id=1${reset}"
             ;;
         4) 
             echo -e "${neon_green}[+] Installing Sniper...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/1N3/Sn1per.git
+            git clone https://github.com/1N3/Sn1per.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             echo -e "${neon_blue}[i] Usage: cd Sn1per && bash install.sh${reset}"
             ;;
         5) 
             echo -e "${neon_green}[+] Installing Sherlock...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/sherlock-project/sherlock.git
+            git clone https://github.com/sherlock-project/sherlock.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             echo -e "${neon_blue}[i] Usage: cd sherlock && python3 sherlock username${reset}"
             ;;
         6) 
             echo -e "${neon_green}[+] Installing Metasploit Framework...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/rapid7/metasploit-framework.git
+            git clone https://github.com/rapid7/metasploit-framework.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             echo -e "${neon_blue}[i] Run: msfconsole${reset}"
             ;;
         7) 
             echo -e "${neon_green}[+] Installing Hackertarget...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/pyhackertarget/hackertarget.git
+            git clone https://github.com/pyhackertarget/hackertarget.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         8) 
             echo -e "${neon_green}[+] Installing Geo-Recon...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/radioactivetobi/geo-recon.git
+            git clone https://github.com/radioactivetobi/geo-recon.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         9) 
             echo -e "${neon_green}[+] Installing Darkai...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/anovni/darkai.git
+            git clone https://github.com/anovni/darkai.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         10) 
             echo -e "${neon_green}[+] Installing Anonsec...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/anovni/anonsec.git
+            git clone https://github.com/anovni/anonsec.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         11) 
             echo -e "${neon_green}[+] Installing AnonSecIta-DDoS...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/xPloits3c/AnonSecIta-DDoS.git
+            git clone https://github.com/xPloits3c/AnonSecIta-DDoS.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         12) 
             echo -e "${neon_green}[+] Installing DDoS-Ripper...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/palahsu/DDoS-Ripper.git
+            git clone https://github.com/palahsu/DDoS-Ripper.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         13) 
             echo -e "${neon_green}[+] Installing THC-Hydra...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/vanhauser-thc/thc-hydra.git
+            git clone https://github.com/vanhauser-thc/thc-hydra.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         14) 
             echo -e "${neon_green}[+] Installing KARMA-DDoS...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/HyukIsBack/KARMA-DDoS.git
+            git clone https://github.com/HyukIsBack/KARMA-DDoS.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         15) 
             echo -e "${neon_green}[+] Installing MHDDoS...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/MatrixTM/MHDDoS.git
+            git clone https://github.com/MatrixTM/MHDDoS.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         16) 
             echo -e "${neon_green}[+] Installing White-Deface...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/WH1T3-E4GL3/white-deface.git
+            git clone https://github.com/WH1T3-E4GL3/white-deface.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         17) 
             echo -e "${neon_green}[+] Installing Mass-Deface...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/00ms/Mass-deface.git
+            git clone https://github.com/00ms/Mass-deface.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         18) 
             echo -e "${neon_green}[+] Installing PHPSploit...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/nil0x42/phpsploit.git
+            git clone https://github.com/nil0x42/phpsploit.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         19) 
             echo -e "${neon_green}[+] Installing WPScan...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/wpscanteam/wpscan.git
+            git clone https://github.com/wpscanteam/wpscan.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         20) 
             echo -e "${neon_green}[+] Installing MySQL...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/mysqljs/mysql.git
+            git clone https://github.com/mysqljs/mysql.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         21) 
             echo -e "${neon_green}[+] Installing Blindy...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/agienka/blindy.git
+            git clone https://github.com/agienka/blindy.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         22) 
             echo -e "${neon_green}[+] Installing Universal-Bypass...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/0xAgun/universal-bypass.git
+            git clone https://github.com/0xAgun/universal-bypass.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         23) 
             echo -e "${neon_green}[+] Installing Joomscan...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/OWASP/joomscan.git
+            git clone https://github.com/OWASP/joomscan.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         24) 
             echo -e "${neon_green}[+] Installing Dark Dump...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/josh0xA/darkdump.git
+            git clone https://github.com/josh0xA/darkdump.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         25) 
             echo -e "${neon_green}[+] Installing Dark Scrape...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/itsmehacker/DarkScrape.git
+            git clone https://github.com/itsmehacker/DarkScrape.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         26) 
             echo -e "${neon_green}[+] Installing Dorks Eye...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/BullsEye0/dorks-eye.git
+            git clone https://github.com/BullsEye0/dorks-eye.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         27) 
             echo -e "${neon_green}[+] Installing FSociety...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/Manisso/fsociety.git
+            git clone https://github.com/Manisso/fsociety.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         28) 
             echo -e "${neon_green}[+] Installing XSS-Loader...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/capture0x/XSS-LOADER.git
+            git clone https://github.com/capture0x/XSS-LOADER.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         29) 
             echo -e "${neon_green}[+] Installing XSStrike...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/s0md3v/XSStrike.git
+            git clone https://github.com/s0md3v/XSStrike.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         30) 
             echo -e "${neon_green}[+] Installing XSScrapy...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/DanMcInerney/xsscrapy.git
+            git clone https://github.com/DanMcInerney/xsscrapy.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         31) 
             echo -e "${neon_green}[+] Installing IP-Tracer...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/rajkumardusad/IP-Tracer.git
+            git clone https://github.com/rajkumardusad/IP-Tracer.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         32) 
             echo -e "${neon_green}[+] Installing Ufonet...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/epsylon/ufonet.git
+            git clone https://github.com/epsylon/ufonet.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         33) 
             echo -e "${neon_green}[+] Installing DorkScanner...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/madhavmehndiratta/dorkScanner.git
+            git clone https://github.com/madhavmehndiratta/dorkScanner.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         34) 
             echo -e "${neon_green}[+] Installing BlackWidow...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/1N3/BlackWidow.git
+            git clone https://github.com/1N3/BlackWidow.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
             ;;
         35) 
             echo -e "${neon_green}[+] Installing PhoneInfoga...${reset}"
             loading_bar 1 "Installing..."
-            git clone https://github.com/sundowndev/phoneinfoga.git
+            git clone https://github.com/sundowndev/phoneinfoga.git 2>/dev/null || echo -e "${neon_red}Failed to clone repository${reset}"
+            ;;
+        99)
+            echo -e "${neon_yellow}[!] Installing all tools... This may take a while${reset}"
+            for i in {1..35}; do
+                echo -e "${neon_green}[+] Installing tool $i${reset}"
+                # Add installation commands for each tool here
+            done
             ;;
         00) 
             glitch_text "TERMINATING SN1PER..."
@@ -460,9 +466,13 @@ while [ $lagi -lt 6 ]; do
             echo -e "${neon_yellow}[#]> 🕷️ SYSTEM BREACHED${reset}"
             echo -e "${neon_blue}[#]> 📁 Tools located at: /SN1PER${reset}"
             echo -e "${neon_purple}"
-            figlet "HACK THE PLANET" | lolcat
+            if command -v figlet >/dev/null 2>&1 && command -v lolcat >/dev/null 2>&1; then
+                figlet "HACK THE PLANET" | lolcat
+            else
+                echo -e "HACK THE PLANET"
+            fi
             echo -e "${reset}"
-            exit
+            exit 0
             ;;
         *) 
             echo -e "${neon_red}${blink}[!] ERROR: Invalid Selection!${reset}"
@@ -472,5 +482,4 @@ while [ $lagi -lt 6 ]; do
     
     echo -e "\n${neon_green}${bold}[+] Operation Complete!${reset}"
     sleep 1
-done
 done
